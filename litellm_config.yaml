@@ -1,0 +1,45 @@
+# LiteLLM Proxy Configuration for Antigravity Enterprise Gateway (Vertex AI)
+# Docs: https://docs.cloud.google.com/gemini/enterprise/docs/ai-developer-tools/deploy-enterprise-gateway
+
+model_list:
+
+  - model_name: workhorse
+    litellm_params:
+      model: vertex_ai/gemini-3.8-flash
+      vertex_project: os.environ/VERTEX_PROJECT_ID
+      vertex_location: "global"
+      thinking_level: "LOW"
+
+  - model_name: gemini-3.8-flash
+    litellm_params:
+      model: vertex_ai/gemini-3.8-flash
+      vertex_project: os.environ/VERTEX_PROJECT_ID
+      vertex_location: "global"
+
+  - model_name: gemini-3.7-flash
+    litellm_params:
+      model: vertex_ai/gemini-3.8-flash
+      vertex_project: os.environ/VERTEX_PROJECT_ID
+      vertex_location: "global"
+
+  - model_name: gemini-4-argon
+    litellm_params:
+      model: vertex_ai/gemini-4-argon
+      vertex_project: os.environ/VERTEX_PROJECT_ID
+      vertex_location: "global"
+
+  # Wildcard fallback: routes any other requested Gemini model to Vertex AI
+  - model_name: "gemini-*"
+    litellm_params:
+      model: "vertex_ai/gemini-*"
+      vertex_project: os.environ/VERTEX_PROJECT_ID
+      vertex_location: os.environ/VERTEX_LOCATION
+
+litellm_settings:
+  forward_client_headers_to_llm_api: true
+  drop_params: true
+  request_timeout: 3600
+
+general_settings:
+  master_key: os.environ/GATEWAY_API_KEY
+  forward_client_headers_to_llm_api: true
