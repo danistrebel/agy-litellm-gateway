@@ -1,4 +1,4 @@
-litellm[proxy]>=1.63.0
+litellm[proxy]>=1.106.6
 google-auth>=2.35.0
 google-auth-httplib2>=0.2.0
 google-genai>=1.0.0
